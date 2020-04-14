@@ -6,9 +6,10 @@
 //                       |
 
 import config from './config'
+import logger from './logger'
 
 async function main(): Promise<void> {
-    console.log(config.store)
+    logger.info('Hello :)')
 }
 
 main()
