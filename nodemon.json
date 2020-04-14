@@ -1,0 +1,10 @@
+{
+    "verbose": false,
+    "quiet": true,
+    "ignore": "./dist",
+    "exec": "tsc && node ./dist/laghu.js",
+    "ext": "ts,json",
+    "watch": [
+        "./src"
+    ]
+}
