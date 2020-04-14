@@ -5,8 +5,10 @@
 //   _____/   /_____/    |  Entryfile for laghu file
 //                       |
 
+import config from './config'
+
 async function main(): Promise<void> {
-    console.log('hi! :)')
+    console.log(config.store)
 }
 
 main()

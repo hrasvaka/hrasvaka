@@ -19,6 +19,10 @@
     "scripts": {
         "start": "nodemon"
     },
+    "dependencies": {
+        "conf": "^6.2.4",
+        "js-yaml": "^3.13.1"
+    },
     "devDependencies": {
         "@types/node": "^13.11.1",
         "@typescript-eslint/eslint-plugin": "^2.28.0",

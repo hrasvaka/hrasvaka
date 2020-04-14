@@ -38,6 +38,8 @@ module.exports = {
         'semi': [
             'error',
             'never'
-        ]
+        ],
+        '@typescript-eslint/member-delimiter-style': 'off',
+        '@typescript-eslint/no-explicit-any': 'off'
     }
 }
