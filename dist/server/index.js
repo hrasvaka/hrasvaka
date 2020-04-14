@@ -39,22 +39,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var config_1 = __importDefault(require("./config"));
-var database_1 = require("./api/database");
-var index_1 = __importDefault(require("./server/index"));
-function main() {
+var http_1 = __importDefault(require("http"));
+var chalk_1 = __importDefault(require("chalk"));
+var express_1 = __importDefault(require("express"));
+var logger_1 = __importDefault(require("../logger"));
+var app = express_1.default();
+var server = http_1.default.createServer(app);
+function start(port, host) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4, database_1.connectToDatabase()];
-                case 1:
-                    _a.sent();
-                    return [4, index_1.default(config_1.default.get('server.port'), config_1.default.get('server.host'))];
-                case 2:
-                    _a.sent();
-                    return [2];
-            }
+            server.listen(port, host);
+            logger_1.default.info(chalk_1.default.greenBright("Ready for requests on http://" + host + ":" + port));
+            return [2];
         });
     });
 }
-main();
+exports.default = start;

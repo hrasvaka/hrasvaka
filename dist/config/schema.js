@@ -42,5 +42,19 @@ var exportable = {
         default: {},
         required: ['client'],
     },
+    server: {
+        type: 'object',
+        default: {},
+        properties: {
+            host: {
+                type: 'string',
+                default: '127.0.0.1',
+            },
+            port: {
+                type: 'number',
+                default: 2442,
+            },
+        },
+    },
 };
 exports.default = exportable;

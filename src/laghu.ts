@@ -5,10 +5,16 @@
 //   _____/   /_____/    |  Entryfile for laghu file
 //                       |
 
-import { connectToDatabase } from './database'
+import config from './config'
+import { connectToDatabase } from './api/database'
+import startWebserver from './server/index'
 
 async function main(): Promise<void> {
     await connectToDatabase()
+    await startWebserver(
+        config.get('server.port') as number,
+        config.get('server.host') as string,
+    )
 }
 
 main()
