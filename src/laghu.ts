@@ -5,11 +5,10 @@
 //   _____/   /_____/    |  Entryfile for laghu file
 //                       |
 
-import config from './config'
-import logger from './logger'
+import { connectToDatabase } from './database'
 
 async function main(): Promise<void> {
-    logger.info('Hello :)')
+    await connectToDatabase()
 }
 
 main()

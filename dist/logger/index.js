@@ -3,7 +3,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var info_1 = __importDefault(require("./info"));
+var chalk_1 = __importDefault(require("chalk"));
+var moment_1 = __importDefault(require("moment"));
+function info(message) {
+    console.log(moment_1.default().format('YYYY-MM-DD hh-mm-ss') + " [" + chalk_1.default.yellowBright('INFO') + "] " + message);
+}
+function error(message) {
+    console.log(moment_1.default().format('YYYY-MM-DD hh-mm-ss') + " [" + chalk_1.default.redBright('ERROR') + "] " + message);
+}
 exports.default = {
-    info: info_1.default,
+    info: info,
+    error: error,
 };

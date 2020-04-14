@@ -23,7 +23,6 @@ var exportable = {
                     },
                     port: {
                         type: 'number',
-                        default: 5432,
                     },
                     database: {
                         type: 'string',
