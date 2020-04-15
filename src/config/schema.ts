@@ -5,6 +5,9 @@ interface SchemaImpl {
 }
 
 const exportable: SchemaImpl = {
+    privateSecret: {
+        type: 'string',
+    },
     database: {
         type: 'object',
         properties: {

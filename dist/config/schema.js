@@ -1,6 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var exportable = {
+    privateSecret: {
+        type: 'string',
+    },
     database: {
         type: 'object',
         properties: {

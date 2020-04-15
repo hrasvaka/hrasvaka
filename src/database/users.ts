@@ -1,7 +1,7 @@
 import database from './index'
-import { AuthDataImpl } from '../controllers/auth'
+import { NewAuthDataImpl } from '../controllers/auth/new'
 
-export interface UserImpl extends AuthDataImpl {
+export interface UserImpl extends NewAuthDataImpl {
     displayName: string
     isAdmin: boolean
     createdOn: string

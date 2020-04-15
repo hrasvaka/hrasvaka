@@ -2,17 +2,19 @@ import bcrypt from 'bcryptjs'
 import validator from 'validator'
 import moment from 'moment'
 
-import { ResponseImpl } from '../server'
-import users from '../database/users'
+import { ResponseImpl } from '../../server'
+import users from '../../database/users'
 
-export interface AuthDataImpl {
+export interface NewAuthDataImpl {
     username: string
     displayName: string
     email: string
     password: string
 }
 
-async function registerNewUser(data: AuthDataImpl): Promise<ResponseImpl> {
+export default async function newUser(
+    data: NewAuthDataImpl,
+): Promise<ResponseImpl> {
     const response: ResponseImpl = {
         code: null,
         error: null,
@@ -111,8 +113,4 @@ async function registerNewUser(data: AuthDataImpl): Promise<ResponseImpl> {
     response.error = false
     response.message = 'The new user has been successfully created.'
     return response
-}
-
-export default {
-    registerNewUser,
 }

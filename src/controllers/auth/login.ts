@@ -1,0 +1,60 @@
+import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken'
+
+import { ResponseImpl } from '../../server'
+import users from '../../database/users'
+import config from '../../config'
+
+interface AuthDataImpl {
+    username: string
+    password: string
+}
+
+export default async function loginUser(data: AuthDataImpl): Promise<any> {
+    const response: ResponseImpl = {
+        code: null,
+        error: null,
+        data: null,
+        message: null,
+    }
+
+    // check if a user exists with that username
+    const user = await users.get.by.username(data.username)
+
+    if (!user) {
+        response.code = 401
+        response.error = false
+        response.message = 'Login failed.'
+        return response
+    } else {
+        // now check if the password matches
+        const correctPassword = await bcrypt.compare(
+            data.password,
+            user.password,
+        )
+
+        if (correctPassword) {
+            // create a jwt
+            const token = jwt.sign(
+                {
+                    username: user.username,
+                },
+                config.get('privateSecret') as string,
+                {
+                    expiresIn: 3600,
+                },
+            )
+
+            response.code = 200
+            response.error = false
+            response.data = token
+            response.message = 'You have been successfully logged in.'
+            return response
+        } else {
+            response.code = 401
+            response.error = false
+            response.message = 'Login failed.'
+            return response
+        }
+    }
+}

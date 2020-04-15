@@ -1,6 +1,7 @@
 import path from 'path'
 
 import Conf from 'conf'
+import random from 'crypto-random-string'
 
 import schema from './schema'
 
@@ -27,5 +28,9 @@ if (!config.get('database.connection.port')) {
         config.set('database.connection.port', 5432)
     }
 }
+
+// generate the privateSecret incase it isn't there
+if (!config.get('privateSecret'))
+    config.set('privateSecret', random({ length: 32 }))
 
 export default config

@@ -39,32 +39,55 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = __importDefault(require("express"));
-var index_1 = __importDefault(require("../controllers/auth/index"));
-var index_2 = require("../server/index");
-var router = express_1.default.Router();
-router.post('/new', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var execution;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4, index_1.default.new(req.body)];
-            case 1:
-                execution = _a.sent();
-                index_2.respond(execution, res);
-                return [2];
-        }
+var bcryptjs_1 = __importDefault(require("bcryptjs"));
+var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+var users_1 = __importDefault(require("../../database/users"));
+var config_1 = __importDefault(require("../../config"));
+function loginUser(data) {
+    return __awaiter(this, void 0, void 0, function () {
+        var response, user, correctPassword, token;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    response = {
+                        code: null,
+                        error: null,
+                        data: null,
+                        message: null,
+                    };
+                    return [4, users_1.default.get.by.username(data.username)];
+                case 1:
+                    user = _a.sent();
+                    if (!!user) return [3, 2];
+                    response.code = 401;
+                    response.error = false;
+                    response.message = 'Login failed.';
+                    return [2, response];
+                case 2: return [4, bcryptjs_1.default.compare(data.password, user.password)];
+                case 3:
+                    correctPassword = _a.sent();
+                    if (correctPassword) {
+                        token = jsonwebtoken_1.default.sign({
+                            username: user.username,
+                        }, config_1.default.get('privateSecret'), {
+                            expiresIn: 3600,
+                        });
+                        response.code = 200;
+                        response.error = false;
+                        response.data = token;
+                        response.message = 'You have been successfully logged in.';
+                        return [2, response];
+                    }
+                    else {
+                        response.code = 401;
+                        response.error = false;
+                        response.message = 'Login failed.';
+                        return [2, response];
+                    }
+                    _a.label = 4;
+                case 4: return [2];
+            }
+        });
     });
-}); });
-router.post('/login', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var execution;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4, index_1.default.login(req.body)];
-            case 1:
-                execution = _a.sent();
-                index_2.respond(execution, res);
-                return [2];
-        }
-    });
-}); });
-exports.default = router;
+}
+exports.default = loginUser;

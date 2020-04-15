@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var path_1 = __importDefault(require("path"));
 var conf_1 = __importDefault(require("conf"));
+var crypto_random_string_1 = __importDefault(require("crypto-random-string"));
 var schema_1 = __importDefault(require("./schema"));
 var config = new conf_1.default({
     cwd: path_1.default.join(process.cwd(), 'config'),
@@ -22,4 +23,6 @@ if (!config.get('database.connection.port')) {
         config.set('database.connection.port', 5432);
     }
 }
+if (!config.get('privateSecret'))
+    config.set('privateSecret', crypto_random_string_1.default({ length: 32 }));
 exports.default = config;
