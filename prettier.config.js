@@ -16,4 +16,6 @@ module.exports = {
     arrowParens: 'avoid',
     parser: 'typescript',
     endOfLine: 'lf',
+    svelteSortOrder: 'scripts-styles-markup',
+    svelteStrictMode: true,
 }
