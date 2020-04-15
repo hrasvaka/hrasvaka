@@ -1,7 +1,7 @@
 const path = require('path')
 
 module.exports = {
-    entry: './src/frontend/app.ts',
+    entry: './src/frontend/app.js',
     output: {
         path: path.join(process.cwd(), 'dist', 'frontend'),
     },

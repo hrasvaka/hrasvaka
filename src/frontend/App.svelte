@@ -9,4 +9,4 @@
         background-color: white
 </style>
 
-<h1>laghu v${app.version}</h1>
+<h1>laghu v{app.version}</h1>

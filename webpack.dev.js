@@ -8,7 +8,9 @@ const common = require('./webpack.config')
 module.exports = merge(common, {
     mode: 'development',
     plugins: [
-        new CleanWebpackPlugin.CleanWebpackPlugin(),
+        new CleanWebpackPlugin.CleanWebpackPlugin({
+            cleanAfterEveryBuildPatterns: ['!*.html'],
+        }),
         new HTMLWebpackPlugin({
             template: './src/frontend/index.html',
         }),
