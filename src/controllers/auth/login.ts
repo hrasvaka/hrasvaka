@@ -24,7 +24,7 @@ export default async function loginUser(data: AuthDataImpl): Promise<any> {
     if (!user) {
         response.code = 401
         response.error = false
-        response.message = 'Login failed.'
+        response.message = 'Unauthorized.'
         return response
     } else {
         // now check if the password matches
@@ -41,7 +41,7 @@ export default async function loginUser(data: AuthDataImpl): Promise<any> {
                 },
                 config.get('privateSecret') as string,
                 {
-                    expiresIn: 3600,
+                    expiresIn: '1h',
                 },
             )
 
@@ -53,7 +53,7 @@ export default async function loginUser(data: AuthDataImpl): Promise<any> {
         } else {
             response.code = 401
             response.error = false
-            response.message = 'Login failed.'
+            response.message = 'Unauthorized.'
             return response
         }
     }

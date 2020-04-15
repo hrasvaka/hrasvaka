@@ -39,55 +39,46 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var bcryptjs_1 = __importDefault(require("bcryptjs"));
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-var users_1 = __importDefault(require("../../database/users"));
-var config_1 = __importDefault(require("../../config"));
-function loginUser(data) {
+var index_1 = require("../server/index");
+var config_1 = __importDefault(require("../config"));
+var users_1 = __importDefault(require("../database/users"));
+function loginRequired(req, res, next) {
     return __awaiter(this, void 0, void 0, function () {
-        var response, user, correctPassword, token;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        var token, response, decoded, user, _a;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
                 case 0:
+                    token = req.headers['x-access-token'];
                     response = {
-                        code: null,
-                        error: null,
+                        code: 401,
+                        error: false,
                         data: null,
-                        message: null,
+                        message: 'Unauthorized.',
                     };
-                    return [4, users_1.default.get.by.username(data.username)];
+                    if (!!token) return [3, 1];
+                    index_1.respond(response, res);
+                    return [3, 4];
                 case 1:
-                    user = _a.sent();
-                    if (!!user) return [3, 2];
-                    response.code = 401;
-                    response.error = false;
-                    response.message = 'Unauthorized.';
-                    return [2, response];
-                case 2: return [4, bcryptjs_1.default.compare(data.password, user.password)];
+                    _b.trys.push([1, 3, , 4]);
+                    decoded = jsonwebtoken_1.default.verify(token, config_1.default.get('privateSecret'), {
+                        maxAge: '1h',
+                    });
+                    return [4, users_1.default.get.by.username(decoded.username)];
+                case 2:
+                    user = _b.sent();
+                    if (!user)
+                        index_1.respond(response, res);
+                    req.login = user;
+                    next();
+                    return [3, 4];
                 case 3:
-                    correctPassword = _a.sent();
-                    if (correctPassword) {
-                        token = jsonwebtoken_1.default.sign({
-                            username: user.username,
-                        }, config_1.default.get('privateSecret'), {
-                            expiresIn: '1h',
-                        });
-                        response.code = 200;
-                        response.error = false;
-                        response.data = token;
-                        response.message = 'You have been successfully logged in.';
-                        return [2, response];
-                    }
-                    else {
-                        response.code = 401;
-                        response.error = false;
-                        response.message = 'Unauthorized.';
-                        return [2, response];
-                    }
-                    _a.label = 4;
+                    _a = _b.sent();
+                    index_1.respond(response, res);
+                    return [3, 4];
                 case 4: return [2];
             }
         });
     });
 }
-exports.default = loginUser;
+exports.default = loginRequired;

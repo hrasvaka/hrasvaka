@@ -6,6 +6,7 @@ import bodyParser from 'body-parser'
 
 import logger from '../logger'
 import auth from '../routes/auth'
+import { UserImpl } from '../database/users'
 
 const app = express()
 const server = http.createServer(app)
@@ -31,6 +32,10 @@ export interface ResponseImpl {
     error: boolean
     message: string
     data: any
+}
+
+export interface ExpressRequest extends express.Request {
+    login: UserImpl
 }
 
 export function respond(data: ResponseImpl, res: express.Response): void {
