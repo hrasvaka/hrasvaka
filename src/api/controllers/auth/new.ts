@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs'
 import validator from 'validator'
 import moment from 'moment'
 
-import { ResponseImpl } from '../../server'
+import { ResponseImpl } from '../../../server'
 import users from '../../database/users'
 
 export interface NewAuthDataImpl {

@@ -39,34 +39,55 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var http_1 = __importDefault(require("http"));
-var chalk_1 = __importDefault(require("chalk"));
-var express_1 = __importDefault(require("express"));
-var body_parser_1 = __importDefault(require("body-parser"));
-var logger_1 = __importDefault(require("../logger"));
-var api_1 = __importDefault(require("../api"));
-var app = express_1.default();
-var server = http_1.default.createServer(app);
-app.use(body_parser_1.default.urlencoded({ extended: false }));
-app.use(body_parser_1.default.json());
-function start(port, host) {
+var bcryptjs_1 = __importDefault(require("bcryptjs"));
+var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+var users_1 = __importDefault(require("../../database/users"));
+var config_1 = __importDefault(require("../../../config"));
+function loginUser(data) {
     return __awaiter(this, void 0, void 0, function () {
+        var response, user, correctPassword, token;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4, api_1.default(app)];
+                case 0:
+                    response = {
+                        code: null,
+                        error: null,
+                        data: null,
+                        message: null,
+                    };
+                    return [4, users_1.default.get.by.username(data.username)];
                 case 1:
-                    _a.sent();
-                    server.listen(port, host);
-                    logger_1.default.info(chalk_1.default.greenBright("Ready for requests on http://" + host + ":" + port));
-                    return [2];
+                    user = _a.sent();
+                    if (!!user) return [3, 2];
+                    response.code = 401;
+                    response.error = false;
+                    response.message = 'Unauthorized.';
+                    return [2, response];
+                case 2: return [4, bcryptjs_1.default.compare(data.password, user.password)];
+                case 3:
+                    correctPassword = _a.sent();
+                    if (correctPassword) {
+                        token = jsonwebtoken_1.default.sign({
+                            username: user.username,
+                        }, config_1.default.get('privateSecret'), {
+                            expiresIn: '1h',
+                        });
+                        response.code = 200;
+                        response.error = false;
+                        response.data = token;
+                        response.message = 'You have been successfully logged in.';
+                        return [2, response];
+                    }
+                    else {
+                        response.code = 401;
+                        response.error = false;
+                        response.message = 'Unauthorized.';
+                        return [2, response];
+                    }
+                    _a.label = 4;
+                case 4: return [2];
             }
         });
     });
 }
-exports.default = start;
-function respond(data, res) {
-    var code = data.code;
-    delete data.code;
-    res.status(code).json(data);
-}
-exports.respond = respond;
+exports.default = loginUser;

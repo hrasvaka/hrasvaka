@@ -39,34 +39,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var http_1 = __importDefault(require("http"));
-var chalk_1 = __importDefault(require("chalk"));
 var express_1 = __importDefault(require("express"));
-var body_parser_1 = __importDefault(require("body-parser"));
-var logger_1 = __importDefault(require("../logger"));
-var api_1 = __importDefault(require("../api"));
-var app = express_1.default();
-var server = http_1.default.createServer(app);
-app.use(body_parser_1.default.urlencoded({ extended: false }));
-app.use(body_parser_1.default.json());
-function start(port, host) {
+var config_1 = __importDefault(require("../config"));
+var auth_1 = __importDefault(require("./routes/auth"));
+var api = express_1.default.Router();
+function linkUp(app) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4, api_1.default(app)];
-                case 1:
-                    _a.sent();
-                    server.listen(port, host);
-                    logger_1.default.info(chalk_1.default.greenBright("Ready for requests on http://" + host + ":" + port));
-                    return [2];
+            api.use('/auth', auth_1.default);
+            if (config_1.default.get('frontend') == true) {
+                app.use('/~', api);
             }
+            else {
+                app.use('/', api);
+            }
+            return [2];
         });
     });
 }
-exports.default = start;
-function respond(data, res) {
-    var code = data.code;
-    delete data.code;
-    res.status(code).json(data);
-}
-exports.respond = respond;
+exports.default = linkUp;

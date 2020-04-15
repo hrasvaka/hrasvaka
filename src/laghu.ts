@@ -6,7 +6,7 @@
 //                       |
 
 import config from './config'
-import { connectToDatabase } from './database'
+import { connectToDatabase } from './api/database'
 import startWebserver from './server/index'
 
 async function main(): Promise<void> {

@@ -34,6 +34,6 @@ if (!config.get('privateSecret'))
     config.set('privateSecret', random({ length: 32 }))
 
 // set the frontend to true if it's not there
-if (!config.get('frontend')) config.set('frontend', true)
+if (config.get('frontend') == undefined) config.set('frontend', true)
 
 export default config

@@ -1,8 +1,8 @@
 import express from 'express'
 import jwt from 'jsonwebtoken'
 
-import { ResponseImpl, respond, ExpressRequest } from '../server/index'
-import config from '../config'
+import { ResponseImpl, respond, ExpressRequest } from '../../server/index'
+import config from '../../config'
 import users, { UserImpl } from '../database/users'
 
 export default async function loginRequired(

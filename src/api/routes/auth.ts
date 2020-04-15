@@ -1,7 +1,7 @@
 import express from 'express'
 
 import auth from '../controllers/auth/index'
-import { respond, ExpressRequest } from '../server/index'
+import { respond, ExpressRequest } from '../../server/index'
 
 const router = express.Router()
 

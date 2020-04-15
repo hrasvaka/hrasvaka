@@ -25,6 +25,6 @@ if (!config.get('database.connection.port')) {
 }
 if (!config.get('privateSecret'))
     config.set('privateSecret', crypto_random_string_1.default({ length: 32 }));
-if (!config.get('frontend'))
+if (config.get('frontend') == undefined)
     config.set('frontend', true);
 exports.default = config;

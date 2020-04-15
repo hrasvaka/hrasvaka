@@ -5,8 +5,9 @@ import express from 'express'
 import bodyParser from 'body-parser'
 
 import logger from '../logger'
-import auth from '../routes/auth'
-import { UserImpl } from '../database/users'
+import { UserImpl } from '../api/database/users'
+
+import api from '../api'
 
 const app = express()
 const server = http.createServer(app)
@@ -17,10 +18,10 @@ app.use(bodyParser.json())
 
 // TODO: Handle the CORS
 
-// connect our routes
-app.use('/auth', auth)
-
 export default async function start(port: number, host: string): Promise<void> {
+    // do the routing according to our config
+    await api(app)
+
     server.listen(port, host)
     logger.info(
         chalk.greenBright(`Ready for requests on http://${host}:${port}`),

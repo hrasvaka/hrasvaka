@@ -1,9 +1,9 @@
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
-import { ResponseImpl } from '../../server'
+import { ResponseImpl } from '../../../server'
 import users from '../../database/users'
-import config from '../../config'
+import config from '../../../config'
 
 interface AuthDataImpl {
     username: string
