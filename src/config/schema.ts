@@ -8,6 +8,9 @@ const exportable: SchemaImpl = {
     privateSecret: {
         type: 'string',
     },
+    frontend: {
+        type: 'boolean',
+    },
     database: {
         type: 'object',
         properties: {

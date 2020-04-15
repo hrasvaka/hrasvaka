@@ -4,6 +4,9 @@ var exportable = {
     privateSecret: {
         type: 'string',
     },
+    frontend: {
+        type: 'boolean',
+    },
     database: {
         type: 'object',
         properties: {

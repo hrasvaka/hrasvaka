@@ -6,6 +6,6 @@
     "ext": "ts,json",
     "watch": [
         "./src",
-        "./content/config"
+        "./config"
     ]
 }
