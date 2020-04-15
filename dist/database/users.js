@@ -39,30 +39,37 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var http_1 = __importDefault(require("http"));
-var chalk_1 = __importDefault(require("chalk"));
-var express_1 = __importDefault(require("express"));
-var body_parser_1 = __importDefault(require("body-parser"));
-var logger_1 = __importDefault(require("../logger"));
-var auth_1 = __importDefault(require("../routes/auth"));
-var app = express_1.default();
-var server = http_1.default.createServer(app);
-app.use(body_parser_1.default.urlencoded({ extended: false }));
-app.use(body_parser_1.default.json());
-app.use('/auth', auth_1.default);
-function start(port, host) {
+var index_1 = __importDefault(require("./index"));
+function addNew(data) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            server.listen(port, host);
-            logger_1.default.info(chalk_1.default.greenBright("Ready for requests on http://" + host + ":" + port));
-            return [2];
+            switch (_a.label) {
+                case 0: return [4, index_1.default('users').insert(data)];
+                case 1: return [2, _a.sent()];
+            }
         });
     });
 }
-exports.default = start;
-function respond(data, res) {
-    var code = data.code;
-    delete data.code;
-    res.status(code).json(data);
+function getByUsername(username) {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            return [2, index_1.default('users').where({ username: username }).select().first()];
+        });
+    });
 }
-exports.respond = respond;
+function getByEmail(email) {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            return [2, index_1.default('users').where({ email: email }).select().first()];
+        });
+    });
+}
+exports.default = {
+    addNew: addNew,
+    get: {
+        by: {
+            username: getByUsername,
+            email: getByEmail,
+        },
+    },
+};

@@ -5,7 +5,7 @@ import Conf from 'conf'
 import schema from './schema'
 
 const config = new Conf({
-    cwd: path.join(process.cwd(), 'content', 'config'),
+    cwd: path.join(process.cwd(), 'config'),
     schema: schema,
     clearInvalidConfig: true,
 })

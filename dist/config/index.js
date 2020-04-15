@@ -7,7 +7,7 @@ var path_1 = __importDefault(require("path"));
 var conf_1 = __importDefault(require("conf"));
 var schema_1 = __importDefault(require("./schema"));
 var config = new conf_1.default({
-    cwd: path_1.default.join(process.cwd(), 'content', 'config'),
+    cwd: path_1.default.join(process.cwd(), 'config'),
     schema: schema_1.default,
     clearInvalidConfig: true,
 });

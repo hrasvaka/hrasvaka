@@ -39,30 +39,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var http_1 = __importDefault(require("http"));
-var chalk_1 = __importDefault(require("chalk"));
 var express_1 = __importDefault(require("express"));
-var body_parser_1 = __importDefault(require("body-parser"));
-var logger_1 = __importDefault(require("../logger"));
-var auth_1 = __importDefault(require("../routes/auth"));
-var app = express_1.default();
-var server = http_1.default.createServer(app);
-app.use(body_parser_1.default.urlencoded({ extended: false }));
-app.use(body_parser_1.default.json());
-app.use('/auth', auth_1.default);
-function start(port, host) {
-    return __awaiter(this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            server.listen(port, host);
-            logger_1.default.info(chalk_1.default.greenBright("Ready for requests on http://" + host + ":" + port));
-            return [2];
-        });
+var auth_1 = __importDefault(require("../controllers/auth"));
+var index_1 = require("../server/index");
+var router = express_1.default.Router();
+router.post('/new', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var execution;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4, auth_1.default.registerNewUser(req.body)];
+            case 1:
+                execution = _a.sent();
+                index_1.respond(execution, res);
+                return [2];
+        }
     });
-}
-exports.default = start;
-function respond(data, res) {
-    var code = data.code;
-    delete data.code;
-    res.status(code).json(data);
-}
-exports.respond = respond;
+}); });
+router.post('/login', function (req, res) {
+    res.send('Authenticate existing user!');
+});
+exports.default = router;
