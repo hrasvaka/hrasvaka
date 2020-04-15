@@ -1,11 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var exportable = {
-    frontend: {
-        type: 'boolean',
-        default: true,
-        description: 'Whether to integrate the web service along with the API.',
-    },
     database: {
         type: 'object',
         properties: {

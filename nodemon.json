@@ -5,6 +5,7 @@
     "exec": "tsc && node ./dist/laghu.js",
     "ext": "ts,json",
     "watch": [
-        "./src"
+        "./src",
+        "./content/config"
     ]
 }

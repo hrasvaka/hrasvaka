@@ -5,8 +5,8 @@ import path from 'path'
 
 import execa from 'execa'
 
-import config from '../../config'
-import logger from '../../logger'
+import config from '../config'
+import logger from '../logger'
 
 export default knex(config.get('database'))
 

@@ -40,7 +40,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var config_1 = __importDefault(require("./config"));
-var database_1 = require("./api/database");
+var database_1 = require("./database");
 var index_1 = __importDefault(require("./server/index"));
 function main() {
     return __awaiter(this, void 0, void 0, function () {

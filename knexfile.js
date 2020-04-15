@@ -4,7 +4,7 @@ const yaml = require('js-yaml')
 
 const config = yaml.safeLoad(
     fs.readFileSync(
-        path.join(process.cwd(), 'content', 'config', 'config.yml'),
+        path.join(process.cwd(), 'content', 'config', 'config.json'),
         { encoding: 'UTF-8' },
     ),
 )
