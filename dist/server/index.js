@@ -51,30 +51,19 @@ var app = express_1.default();
 var server = http_1.default.createServer(app);
 app.use(body_parser_1.default.urlencoded({ extended: false }));
 app.use(body_parser_1.default.json());
-function serveFrontend(app) {
-    return __awaiter(this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            if (config_1.default.get('frontend') == false)
-                return [2];
-            app.use(express_1.default.static(path_1.default.join(process.cwd(), 'dist', 'frontend')));
-            return [2];
-        });
-    });
-}
 function start(port, host) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4, serveFrontend(app)];
-                case 1:
-                    _a.sent();
-                    return [4, api_1.default(app)];
-                case 2:
-                    _a.sent();
-                    server.listen(port, host);
-                    logger_1.default.info(chalk_1.default.greenBright("Ready for requests on http://" + host + ":" + port));
-                    return [2];
+            app.use('/~', api_1.default);
+            if (config_1.default.get('frontend') == true) {
+                app.use('/-', express_1.default.static(path_1.default.join(process.cwd(), 'dist', 'frontend')));
+                app.get('/-/*', function (req, res) {
+                    res.sendFile(path_1.default.join(process.cwd(), 'dist', 'frontend', 'index.html'));
+                });
             }
+            server.listen(port, host);
+            logger_1.default.info(chalk_1.default.greenBright("Ready for requests on http://" + host + ":" + port));
+            return [2];
         });
     });
 }

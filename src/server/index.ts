@@ -20,16 +20,20 @@ app.use(bodyParser.json())
 
 // TODO: Handle the CORS
 
-async function serveFrontend(app: express.Express): Promise<void> {
-    if (config.get('frontend') == false) return
-
-    app.use(express.static(path.join(process.cwd(), 'dist', 'frontend')))
-}
-
 export default async function start(port: number, host: string): Promise<void> {
     // do the routing according to our config
-    await serveFrontend(app)
-    await api(app)
+    app.use('/~', api)
+    if (config.get('frontend') == true) {
+        app.use(
+            '/-',
+            express.static(path.join(process.cwd(), 'dist', 'frontend')),
+        )
+        app.get('/-/*', (req: ExpressRequest, res: express.Response) => {
+            res.sendFile(
+                path.join(process.cwd(), 'dist', 'frontend', 'index.html'),
+            )
+        })
+    }
 
     server.listen(port, host)
     logger.info(
