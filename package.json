@@ -17,8 +17,8 @@
         "url": "https://github.com/hrasvaka/hrasvaka/issues"
     },
     "scripts": {
-        "start": "nodemon",
-        "build": "rm -rf ./dist && tsc",
+        "start": "concurrently -c 'blue,magenta' -n 'server,frontend' 'nodemon' 'cd ./src/frontend && ./node_modules/.bin/vue-cli-service build --watch'",
+        "build": "rm -rf ./dist && tsc && cd ./src/frontend && ./node_modules/.bin/vue-cli-service build",
         "reset:db": "dropdb hrasvaka && createdb hrasvaka",
         "postinstall": "./scripts/setup.sh"
     },
@@ -46,6 +46,7 @@
         "@types/validator": "^13.0.0",
         "@typescript-eslint/eslint-plugin": "^2.28.0",
         "@typescript-eslint/parser": "^2.28.0",
+        "concurrently": "^5.1.0",
         "eslint": "^6.8.0",
         "eslint-config-prettier": "^6.10.1",
         "eslint-plugin-prettier": "^3.1.3",
