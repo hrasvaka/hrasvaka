@@ -1,3 +1,4 @@
 [submodule "src/frontend"]
 	path = src/frontend
 	url = git@github.com:hrasvaka/frontend.git
+    branch = develop
