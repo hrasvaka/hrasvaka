@@ -20,7 +20,7 @@
         "start": "nodemon",
         "build": "rm -rf ./dist && tsc",
         "reset:db": "dropdb hrasvaka && createdb hrasvaka",
-        "postinstall": "git submodule update"
+        "postinstall": "./scripts/setup.sh"
     },
     "dependencies": {
         "bcryptjs": "^2.4.3",
