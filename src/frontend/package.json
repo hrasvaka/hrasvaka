@@ -1,0 +1,30 @@
+{
+  "name": "hrasvaka",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "vue-cli-service build --watch --dest '../../dist/frontend'",
+    "build": "vue-cli-service build --dest '../../dist/frontend'"
+  },
+  "dependencies": {
+    "core-js": "^3.6.4",
+    "register-service-worker": "^1.7.1",
+    "vue": "^2.6.11",
+    "vue-class-component": "^7.2.3",
+    "vue-property-decorator": "^8.4.1",
+    "vue-router": "^3.1.6"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.3.0",
+    "@vue/cli-plugin-pwa": "~4.3.0",
+    "@vue/cli-plugin-router": "~4.3.0",
+    "@vue/cli-plugin-typescript": "~4.3.0",
+    "@vue/cli-service": "~4.3.0",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^8.0.2",
+    "typescript": "~3.8.3",
+    "vue-template-compiler": "^2.6.11",
+    "webpack-cli": "^3.3.11",
+    "webpack-livereload-plugin": "^2.3.0"
+  }
+}
