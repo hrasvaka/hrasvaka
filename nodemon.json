@@ -2,7 +2,7 @@
     "verbose": false,
     "quiet": true,
     "ignore": ["./dist", "./src/frontend"],
-    "exec": "tsc && node ./dist/laghu.js",
+    "exec": "tsc && node ./dist/hrasvaka.js",
     "ext": "ts,json",
     "watch": [
         "./src",

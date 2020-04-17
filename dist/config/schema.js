@@ -27,11 +27,11 @@ var exportable = {
                     },
                     database: {
                         type: 'string',
-                        default: 'laghu',
+                        default: 'hrasvaka',
                     },
                     user: {
                         type: 'string',
-                        default: 'laghu',
+                        default: 'hrasvaka',
                     },
                     password: {
                         type: ['string', 'null'],

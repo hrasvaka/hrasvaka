@@ -10,7 +10,7 @@ const common = require('./webpack.config')
 module.exports = merge(common, {
     mode: 'production',
     output: {
-        filename: 'laghu.[contentHash].js',
+        filename: 'hrasvaka.[contentHash].js',
     },
     optimization: {
         minimizer: [
@@ -21,7 +21,7 @@ module.exports = merge(common, {
     plugins: [
         new CleanWebpackPlugin.CleanWebpackPlugin(),
         new MiniCSSExtractPlugin({
-            filename: 'laghu.[contentHash].css',
+            filename: 'hrasvaka.[contentHash].css',
         }),
         new HTMLWebpackPlugin({
             template: './src/frontend/index.html',

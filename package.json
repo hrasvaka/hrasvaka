@@ -1,5 +1,5 @@
 {
-    "name": "laghu",
+    "name": "hrasvaka",
     "description": "A modern, self-hosted, and open-source link shortener.",
     "version": "0.0.0",
     "license": "UNLICENSED",
@@ -11,15 +11,15 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/vasanthdeveloper/laghu.git"
+        "url": "https://github.com/hrasvaka/hrasvaka.git"
     },
     "bugs": {
-        "url": "https://github.com/vasanthdeveloper/laghu/issues"
+        "url": "https://github.com/hrasvaka/hrasvaka/issues"
     },
     "scripts": {
         "start": "concurrently -c 'blue,magenta' -n 'server,frontend' 'nodemon' 'webpack -w --config webpack.dev.js'",
         "build": "rm -rf ./dist && tsc && webpack --config webpack.prod.js",
-        "reset:db": "dropdb laghu && createdb laghu"
+        "reset:db": "dropdb hrasvaka && createdb hrasvaka"
     },
     "dependencies": {
         "bcryptjs": "^2.4.3",

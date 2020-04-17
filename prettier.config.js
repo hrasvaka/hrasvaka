@@ -1,6 +1,6 @@
 //   ___    __________   |  Vasanth Developer (Vasanth Srivatsa)
 //   __ |  / /___  __ \  |  ------------------------------------------------
-//   __ | / / __  / / /  |  https://github.com/vasanthdeveloper/laghu.git
+//   __ | / / __  / / /  |  https://github.com/vasanthdeveloper/hrasvaka.git
 //   __ |/ /  _  /_/ /   |
 //   _____/   /_____/    |  Prettier run control
 //                       |
