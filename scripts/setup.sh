@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
-git submodule init && \
-git submodule update && \
+git clone git@github.com:hrasvaka/frontend.git ./src/frontend && \
 cd ./src/frontend && \
 npm install
