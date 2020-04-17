@@ -19,7 +19,8 @@
     "scripts": {
         "start": "nodemon",
         "build": "rm -rf ./dist && tsc",
-        "reset:db": "dropdb hrasvaka && createdb hrasvaka"
+        "reset:db": "dropdb hrasvaka && createdb hrasvaka",
+        "postinstall": "git submodule update"
     },
     "dependencies": {
         "bcryptjs": "^2.4.3",

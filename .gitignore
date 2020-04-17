@@ -116,3 +116,4 @@ web_modules/
 
 # hrasvaka's content directory
 config/
+dist/frontend
