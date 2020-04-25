@@ -49,34 +49,41 @@ function loginRequired(req, res, next) {
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
-                    token = req.headers['x-access-token'];
+                    token = req.headers['authorization'];
                     response = {
                         code: 401,
                         error: false,
                         data: null,
                         message: 'Unauthorized.',
                     };
-                    if (!!token) return [3, 1];
-                    index_1.respond(response, res);
-                    return [3, 4];
+                    if (!(token && token.startsWith('Bearer '))) return [3, 5];
+                    _b.label = 1;
                 case 1:
                     _b.trys.push([1, 3, , 4]);
-                    decoded = jsonwebtoken_1.default.verify(token, config_1.default.get('privateSecret'), {
+                    decoded = jsonwebtoken_1.default.verify(token.substring(7), config_1.default.get('privateSecret'), {
                         maxAge: '1h',
                     });
                     return [4, users_1.default.get.by.username(decoded.username)];
                 case 2:
                     user = _b.sent();
-                    if (!user)
+                    if (!user) {
+                        console.log('Failed');
                         index_1.respond(response, res);
+                    }
                     req.login = user;
                     next();
                     return [3, 4];
                 case 3:
                     _a = _b.sent();
+                    console.log('Failed');
                     index_1.respond(response, res);
                     return [3, 4];
-                case 4: return [2];
+                case 4: return [3, 6];
+                case 5:
+                    console.log('Failed');
+                    index_1.respond(response, res);
+                    _b.label = 6;
+                case 6: return [2];
             }
         });
     });

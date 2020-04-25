@@ -42,7 +42,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var index_1 = __importDefault(require("../controllers/auth/index"));
 var index_2 = require("../../server/index");
+var auth_1 = __importDefault(require("../middlewares/auth"));
 var router = express_1.default.Router();
+router.get('/', auth_1.default, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var execution;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4, index_1.default.index(req.login)];
+            case 1:
+                execution = _a.sent();
+                index_2.respond(execution, res);
+                return [2];
+        }
+    });
+}); });
 router.post('/new', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var execution;
     return __generator(this, function (_a) {

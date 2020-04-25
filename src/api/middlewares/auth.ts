@@ -10,7 +10,7 @@ export default async function loginRequired(
     res: express.Response,
     next,
 ): Promise<void> {
-    const token = req.headers['x-access-token'] as string
+    const token = req.headers['authorization'] as string
     const response: ResponseImpl = {
         code: 401,
         error: false,
@@ -19,13 +19,11 @@ export default async function loginRequired(
     }
 
     // check if the token was passed
-    if (!token) {
-        respond(response, res)
-    } else {
+    if (token && token.startsWith('Bearer ')) {
         try {
             // check the token's validity
             const decoded = jwt.verify(
-                token,
+                token.substring(7),
                 config.get('privateSecret') as string,
                 {
                     maxAge: '1h',
@@ -34,12 +32,19 @@ export default async function loginRequired(
 
             // now check if the user exists
             const user = await users.get.by.username(decoded.username)
-            if (!user) respond(response, res)
+            if (!user) {
+                console.log('Failed')
+                respond(response, res)
+            }
             req.login = user as UserImpl
 
             next()
         } catch {
+            console.log('Failed')
             respond(response, res)
         }
+    } else {
+        console.log('Failed')
+        respond(response, res)
     }
 }
