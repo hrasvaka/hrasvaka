@@ -6,6 +6,15 @@ import authenticated from '../middlewares/auth'
 
 const router = express.Router()
 
+// HEAD /api/auth
+// Registers a new user
+router.head('/', async (req: ExpressRequest, res: express.Response) => {
+    const execution = await auth.new(req.body)
+    respond(execution, res)
+})
+
+// GET /api/auth
+// Responds with the logged in user information
 router.get(
     '/',
     authenticated,
@@ -15,14 +24,20 @@ router.get(
     },
 )
 
-router.post('/new', async (req: ExpressRequest, res: express.Response) => {
-    const execution = await auth.new(req.body)
-    respond(execution, res)
-})
-
-router.post('/login', async (req: ExpressRequest, res: express.Response) => {
+// POST /api/auth
+// Login existing users
+router.post('/', async (req: ExpressRequest, res: express.Response) => {
     const execution = await auth.login(req.body)
     respond(execution, res)
 })
+
+// PUT /api/auth
+// Refresh the user's token
+
+// PATCH /api/auth
+// Update the user's profile
+
+// DELETE /api/auth
+// Delete an existing user
 
 export default router
