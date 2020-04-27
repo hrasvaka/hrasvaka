@@ -22,13 +22,13 @@ app.use(bodyParser.json())
 
 export default async function start(port: number, host: string): Promise<void> {
     // do the routing according to our config
-    app.use('/~', api)
+    app.use('/api', api)
     if (config.get('frontend') == true) {
         app.use(
-            '/-',
+            '/admin',
             express.static(path.join(process.cwd(), 'dist', 'frontend')),
         )
-        app.get('/-/*', (req: ExpressRequest, res: express.Response) => {
+        app.get('/admin/*', (req: ExpressRequest, res: express.Response) => {
             res.sendFile(
                 path.join(process.cwd(), 'dist', 'frontend', 'index.html'),
             )

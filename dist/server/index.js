@@ -54,10 +54,10 @@ app.use(body_parser_1.default.json());
 function start(port, host) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            app.use('/~', api_1.default);
+            app.use('/api', api_1.default);
             if (config_1.default.get('frontend') == true) {
-                app.use('/-', express_1.default.static(path_1.default.join(process.cwd(), 'dist', 'frontend')));
-                app.get('/-/*', function (req, res) {
+                app.use('/admin', express_1.default.static(path_1.default.join(process.cwd(), 'dist', 'frontend')));
+                app.get('/admin/*', function (req, res) {
                     res.sendFile(path_1.default.join(process.cwd(), 'dist', 'frontend', 'index.html'));
                 });
             }
