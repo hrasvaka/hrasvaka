@@ -7,9 +7,10 @@
 import express from 'express'
 import jwt from 'jsonwebtoken'
 
-import { ResponseImpl, respond, ExpressRequest } from '../../server/index'
+import { respond } from '../../server/index'
 import config from '../../config'
 import users, { UserImpl } from '../database/users'
+import { ExpressRequest, ResponseImpl } from '../../server/interfaces'
 
 export default async function loginRequired(
     req: ExpressRequest,

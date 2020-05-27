@@ -5,7 +5,7 @@
 
 import newUser from './new'
 import loginUser from './login'
-import { ResponseImpl } from '../../../server'
+import { ResponseImpl } from '../../../server/interfaces'
 
 export async function auth(data: any): Promise<any> {
     // delete the password as we should NEVER send that

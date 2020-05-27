@@ -60,7 +60,7 @@ const exportable: SchemaImpl = {
             },
             port: {
                 type: 'number',
-                default: 2442,
+                default: 36352,
             },
         },
     },

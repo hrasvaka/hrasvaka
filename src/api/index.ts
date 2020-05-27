@@ -10,6 +10,7 @@ import auth from './routes/auth'
 
 const api = express.Router()
 
+// link the routes under /
 api.use('/auth', auth)
 
 export default api

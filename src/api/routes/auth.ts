@@ -6,8 +6,9 @@
 import express from 'express'
 
 import auth from '../controllers/auth/index'
-import { respond, ExpressRequest } from '../../server/index'
+import { respond } from '../../server/index'
 import authenticated from '../middlewares/auth'
+import { ExpressRequest } from '../../server/interfaces'
 
 const router = express.Router()
 
