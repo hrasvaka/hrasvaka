@@ -3,7 +3,7 @@ const path = require('path')
 const yaml = require('js-yaml')
 
 const config = yaml.safeLoad(
-    fs.readFileSync(path.join(process.cwd(), 'config', 'config.json'), {
+    fs.readFileSync(path.join(process.cwd(), '.hrasvaka.yml'), {
         encoding: 'UTF-8',
     }),
 )

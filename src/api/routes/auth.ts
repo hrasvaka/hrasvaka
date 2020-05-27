@@ -8,7 +8,7 @@ const router = express.Router()
 
 // HEAD /api/auth
 // Registers a new user
-router.head('/', async (req: ExpressRequest, res: express.Response) => {
+router.post('/register', async (req: ExpressRequest, res: express.Response) => {
     const execution = await auth.new(req.body)
     respond(execution, res)
 })
@@ -26,7 +26,7 @@ router.get(
 
 // POST /api/auth
 // Login existing users
-router.post('/', async (req: ExpressRequest, res: express.Response) => {
+router.post('/login', async (req: ExpressRequest, res: express.Response) => {
     const execution = await auth.login(req.body)
     respond(execution, res)
 })

@@ -1,4 +1,3 @@
-import path from 'path'
 import http from 'http'
 
 import chalk from 'chalk'
@@ -9,7 +8,6 @@ import logger from '../logger'
 import { UserImpl } from '../api/database/users'
 
 import api from '../api'
-import config from '../config'
 
 const app = express()
 const server = http.createServer(app)
@@ -21,19 +19,8 @@ app.use(bodyParser.json())
 // TODO: Handle the CORS
 
 export default async function start(port: number, host: string): Promise<void> {
-    // do the routing according to our config
-    app.use('/api', api)
-    if (config.get('frontend') == true) {
-        app.use(
-            '/admin',
-            express.static(path.join(process.cwd(), 'dist', 'frontend')),
-        )
-        app.get('/admin/*', (req: ExpressRequest, res: express.Response) => {
-            res.sendFile(
-                path.join(process.cwd(), 'dist', 'frontend', 'index.html'),
-            )
-        })
-    }
+    // link the api code to the server
+    app.use('/', api)
 
     server.listen(port, host)
     logger.info(

@@ -33,18 +33,15 @@ export default async function loginRequired(
             // now check if the user exists
             const user = await users.get.by.username(decoded.username)
             if (!user) {
-                console.log('Failed')
                 respond(response, res)
             }
             req.login = user as UserImpl
 
             next()
         } catch {
-            console.log('Failed')
             respond(response, res)
         }
     } else {
-        console.log('Failed')
         respond(response, res)
     }
 }

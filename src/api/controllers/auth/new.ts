@@ -35,7 +35,7 @@ export default async function newUser(
         response.error = true
 
         if (!data.username) response.message = 'A username is required.'
-        if (!data.displayName) response.message = 'A name is required.'
+        if (!data.displayName) response.message = 'A displayName is required.'
         if (!data.email) response.message = 'An email is required.'
         if (!data.password) response.message = 'A strong password is required.'
 

@@ -1,8 +1,7 @@
 {
     "verbose": false,
     "quiet": true,
-    "ignore": ["./dist", "./src/frontend"],
-    "exec": "tsc && node ./dist/hrasvaka.js",
+    "exec": "ts-node ./src/hrasvaka.ts",
     "ext": "ts,json",
     "watch": [
         "./src",

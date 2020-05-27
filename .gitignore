@@ -115,6 +115,4 @@ web_modules/
 .pnp.*
 
 # hrasvaka's content directory
-config/
-dist/frontend
-src/frontend
+.hrasvaka.yml
