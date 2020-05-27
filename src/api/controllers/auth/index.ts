@@ -1,3 +1,8 @@
+/*
+ *  When given a valid token, responds with the corresponding user's data .
+ *  Created On 14 April 2020
+ */
+
 import newUser from './new'
 import loginUser from './login'
 import { ResponseImpl } from '../../../server'

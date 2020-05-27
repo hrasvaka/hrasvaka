@@ -1,23 +1,15 @@
+/*
+ *  Imports and configures itivrutaha logging module for logs other than
+ *  web requests.
+ *  Created On 14 April 2020
+ */
+
 import chalk from 'chalk'
-import moment from 'moment'
+import itivrutaha from 'itivrutaha'
 
-function info(message: string): void {
-    console.log(
-        `${moment().format('YYYY-MM-DD hh-mm-ss')} [${chalk.yellowBright(
-            'INFO',
-        )}] ${message}`,
-    )
-}
-
-function error(message: string): void {
-    console.log(
-        `${moment().format('YYYY-MM-DD hh-mm-ss')} [${chalk.redBright(
-            'ERROR',
-        )}] ${message}`,
-    )
-}
-
-export default {
-    info,
-    error,
-}
+export default itivrutaha.createNewLogger({
+    theme: `${chalk.cyanBright('APP')} [${chalk.gray(':time')}] :type :message`,
+    timeFormat: 'hh:MM:ss TT, dS mmm yyyy',
+    boldType: true,
+    typeCase: 0,
+})

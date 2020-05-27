@@ -1,3 +1,9 @@
+/*
+ *  Checks if the provided credentials are valid and responds with a JWT token.
+ *  Which can be used to authenticate the protected API routes.
+ *  Created On 15 April 2020
+ */
+
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 

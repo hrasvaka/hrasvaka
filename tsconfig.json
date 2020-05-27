@@ -1,3 +1,10 @@
+//   ___    __________   |  Vasanth Developer (Vasanth Srivatsa)
+//   __ |  / /___  __ \  |  ------------------------------------------------
+//   __ | / / __  / / /  |  https://github.com/hrasvaka/hrasvaka.git
+//   __ |/ /  _  /_/ /   |
+//   _____/   /_____/    |  TypeScript transpiler run control
+// 
+
 {
     "compileOnSave": true,
     "compilerOptions": {

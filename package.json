@@ -1,9 +1,8 @@
 {
     "name": "hrasvaka",
-    "description": "A modern, self-hosted, and open-source link shortener.",
+    "description": "A 🚀 modern, 🖥 self-hosted, and 😀 open-source 🔗 link-shortener.",
     "version": "0.0.0",
     "license": "UNLICENSED",
-    "private": true,
     "author": {
         "name": "Vasanth Developer",
         "email": "vasanth@vasanthdeveloper.com",
@@ -28,6 +27,7 @@
         "crypto-random-string": "^3.2.0",
         "execa": "^4.0.0",
         "express": "^4.17.1",
+        "itivrutaha": "^0.1.1",
         "js-yaml": "^3.13.1",
         "jsonwebtoken": "^8.5.1",
         "knex": "^0.20.14",

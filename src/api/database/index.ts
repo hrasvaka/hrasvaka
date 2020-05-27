@@ -1,3 +1,9 @@
+/*
+ *  Connects to the database and exposes the connected database to other files in this directory
+ *  and also makes sure the database is always in latest migration.
+ *  Created On 14 April 2020
+ */
+
 import knex from 'knex'
 import chalk from 'chalk'
 

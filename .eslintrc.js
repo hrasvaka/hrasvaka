@@ -1,3 +1,10 @@
+//   ___    __________   |  Vasanth Developer (Vasanth Srivatsa)
+//   __ |  / /___  __ \  |  ------------------------------------------------
+//   __ | / / __  / / /  |  https://github.com/hrasvaka/hrasvaka.git
+//   __ |/ /  _  /_/ /   |
+//   _____/   /_____/    |  ESLint run control
+//                       |
+
 module.exports = {
     'env': {
         'browser': true,

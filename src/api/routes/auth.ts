@@ -1,3 +1,8 @@
+/*
+ *  Routes related authentication like user creation, retrieval, and deletion.
+ *  Created On 15 April 2020
+ */
+
 import express from 'express'
 
 import auth from '../controllers/auth/index'
@@ -6,14 +11,14 @@ import authenticated from '../middlewares/auth'
 
 const router = express.Router()
 
-// HEAD /api/auth
+// POST /auth/register
 // Registers a new user
 router.post('/register', async (req: ExpressRequest, res: express.Response) => {
     const execution = await auth.new(req.body)
     respond(execution, res)
 })
 
-// GET /api/auth
+// GET /auth
 // Responds with the logged in user information
 router.get(
     '/',
@@ -24,7 +29,7 @@ router.get(
     },
 )
 
-// POST /api/auth
+// POST /auth/login
 // Login existing users
 router.post('/login', async (req: ExpressRequest, res: express.Response) => {
     const execution = await auth.login(req.body)

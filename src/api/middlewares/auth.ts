@@ -1,3 +1,9 @@
+/*
+ *  Ensures a token is provided and is valid before letting the actual
+ *  route pass to it's controller.
+ *  Created On 15 April 2020
+ */
+
 import express from 'express'
 import jwt from 'jsonwebtoken'
 

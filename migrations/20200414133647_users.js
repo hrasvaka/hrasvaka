@@ -1,3 +1,8 @@
+/*
+ *  Create the users table in the database.
+ *  Created On 14 April 2020
+ */
+
 exports.up = function (knex) {
     return knex.schema.createTable('users', table => {
         table.string('username', 30)

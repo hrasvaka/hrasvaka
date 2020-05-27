@@ -1,3 +1,8 @@
+/*
+ *  Registers a new user into the API.
+ *  Created On 15 April 2020
+ */
+
 import bcrypt from 'bcryptjs'
 import validator from 'validator'
 import moment from 'moment'

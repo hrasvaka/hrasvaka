@@ -1,3 +1,8 @@
+/*
+ *  Everything related to the users table in the database.
+ *  Created On 15 April 2020
+ */
+
 import database from './index'
 import { NewAuthDataImpl } from '../controllers/auth/new'
 

@@ -1,3 +1,9 @@
+/*
+ *  Defines what properties are allowed in the config file. Unsupported properties
+ *  will be automatically removed from the config file.
+ *  Created On 14 April 2020
+ */
+
 import conf from 'conf'
 
 interface SchemaImpl {

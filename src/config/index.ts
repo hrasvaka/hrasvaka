@@ -1,4 +1,7 @@
-import path from 'path'
+/*
+ *  Loads the config file, if doesn't exist it automatically creates one.
+ *  Created On 14 April 2020
+ */
 
 import Conf from 'conf'
 import yaml from 'js-yaml'
