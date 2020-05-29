@@ -13,14 +13,14 @@ import { ExpressRequest } from '../../server/interfaces'
 const router = express.Router()
 
 // POST /auth/register
-// Registers a new user
+// registers a new user
 router.post('/register', async (req: ExpressRequest, res: express.Response) => {
-    const execution = await auth.new(req.body)
+    const execution = await auth.register(req.body)
     respond(execution, res)
 })
 
 // GET /auth
-// Responds with the logged in user information
+// responds with the logged in user information
 router.get(
     '/',
     authenticated,
@@ -31,11 +31,29 @@ router.get(
 )
 
 // POST /auth/login
-// Login existing users
+// login existing users
 router.post('/login', async (req: ExpressRequest, res: express.Response) => {
-    const execution = await auth.login(req.body)
+    console.log(req.headers['x-forwarded-for'], req.connection.remoteAddress)
+    const execution = await auth.login(
+        req.body,
+        (req.headers['x-forwarded-for'] as string) ||
+            req.connection.remoteAddress,
+    )
     respond(execution, res)
 })
+
+// POST /auth/logout
+// logout already logged in users
+router.post(
+    '/logout',
+    authenticated,
+    async (req: ExpressRequest, res: express.Response) => {
+        const execution = await auth.logout(
+            req.headers.authorization.substring(7),
+        )
+        respond(execution, res)
+    },
+)
 
 // PUT /api/auth
 // Refresh the user's token

@@ -5,6 +5,7 @@
  */
 
 import bcrypt from 'bcryptjs'
+import Cryptr from 'cryptr'
 import jwt from 'jsonwebtoken'
 
 import users from '../../database/users'
@@ -16,7 +17,11 @@ interface AuthDataImpl {
     password: string
 }
 
-export default async function loginUser(data: AuthDataImpl): Promise<any> {
+export default async function loginUser(
+    data: AuthDataImpl,
+    ip: string,
+): Promise<ResponseImpl> {
+    // the response we will send at the end of this operation
     const response: ResponseImpl = {
         code: null,
         error: null,
@@ -39,19 +44,32 @@ export default async function loginUser(data: AuthDataImpl): Promise<any> {
             user.password,
         )
 
+        // prepare a secret to be signed with JWT
+        const passwordPiece = user.password.split('$')[3].slice(-10)
+        const signature = `${config.get(
+            config.get('privateSecret'),
+        )}$${passwordPiece}`
+
+        // delete the password as we should NEVER send that
+        // and delete additional keys that aren't directly required
+        // for every type of request to reduce the size of the token
+        delete user.password
+        delete user.createdOn
+        delete user.email
+
+        // add our password piece to the JWT
+        user['identifier'] = passwordPiece
+
+        // attach the IP address this token was registered
+        user['origin'] = ip
+
         if (correctPassword) {
             // create a jwt
-            const token = jwt.sign(
-                {
-                    username: user.username,
-                },
-                config.get('privateSecret') as string,
-                {
-                    expiresIn: '1h',
-                },
-            )
+            const token = jwt.sign(user, signature, {
+                expiresIn: config.get('tokenExpiry') as number,
+            })
 
-            response.code = 200
+            response.code = 201
             response.error = false
             response.data = token
             response.message = 'You have been successfully logged in.'

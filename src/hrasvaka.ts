@@ -10,6 +10,7 @@ import clearLine from 'clear-terminal-line'
 
 import config from './config'
 import { connectToDatabase } from './api/database'
+import connectToRedis from './api/database/redis/index'
 import startWebserver from './server/index'
 import logger from './logger'
 
@@ -22,6 +23,7 @@ async function main(): Promise<void> {
 
     // connect to the database and set it up
     await connectToDatabase()
+    connectToRedis
 
     // start the webserver and listen for incoming requests
     await startWebserver(

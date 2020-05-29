@@ -12,10 +12,11 @@ import execa from 'execa'
 
 import config from '../../config'
 import logger from '../../logger'
+import users from './users'
 
-export default knex(config.get('database'))
+export default knex(config.get('database').relational)
 
-const conf = config.get('database') as any
+const conf = config.get('database').relational as any
 
 if (conf.client == 'mysql') {
     conf.client = 'mysql2'
@@ -34,7 +35,7 @@ async function initializeTables(): Promise<any> {
 }
 
 export async function connectToDatabase(): Promise<void> {
-    const tempDatabase = await knex(config.get('database'))
+    const tempDatabase = await knex(config.get('database').relational)
 
     // check if we have a successful connection by testing a query
     try {
@@ -49,4 +50,9 @@ export async function connectToDatabase(): Promise<void> {
         logger.error(`Failed to connect to the database due to: ${e.message}`)
         process.exit(2)
     }
+}
+
+// export all other files in a handy object
+export const database = {
+    users,
 }

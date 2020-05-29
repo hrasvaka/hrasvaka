@@ -3,18 +3,26 @@
  *  Created On 14 April 2020
  */
 
-import newUser from './new'
-import loginUser from './login'
+import register from './register'
+import login from './login'
+import logout from './logout'
 import { ResponseImpl } from '../../../server/interfaces'
+import { database } from '../../database/index'
+import { UserImpl } from '../../database/users'
 
 export async function auth(data: any): Promise<any> {
+    // do a database query and get complete user's information
+    const user = (await database.users.get.by.username(
+        data.username,
+    )) as UserImpl
+
     // delete the password as we should NEVER send that
-    delete data.password
+    delete user.password
 
     const response: ResponseImpl = {
         code: 200,
         error: false,
-        data,
+        data: user,
         message: 'Here you go.',
     }
 
@@ -22,7 +30,8 @@ export async function auth(data: any): Promise<any> {
 }
 
 export default {
-    new: newUser,
-    login: loginUser,
     index: auth,
+    register,
+    login,
+    logout,
 }

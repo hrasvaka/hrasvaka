@@ -4,7 +4,7 @@
  */
 
 import database from './index'
-import { NewAuthDataImpl } from '../controllers/auth/new'
+import { NewAuthDataImpl } from '../controllers/auth/register'
 
 export interface UserImpl extends NewAuthDataImpl {
     displayName: string

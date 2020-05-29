@@ -34,23 +34,26 @@ const config = new Conf({
 // as we internally use mysql2 instead of mysql
 // if the user unknowingly puts mysql
 // we silently change it to mysql2
-if (config.get('database.client') == 'mysql') {
-    config.set('database.client', 'mysql2')
+if (config.get('database.relational.client') == 'mysql') {
+    config.set('database.relational.client', 'mysql2')
 }
 
 // if the user didn't specify a port
 // we set it to the default port according to the database
 // adapter specified
-if (!config.get('database.connection.port')) {
-    if (config.get('database.client') == 'mysql2') {
-        config.set('database.connection.port', 3306)
-    } else if (config.get('database.client') == 'pg') {
-        config.set('database.connection.port', 5432)
+if (!config.get('database.relational.connection.port')) {
+    if (config.get('database.relational.client') == 'mysql2') {
+        config.set('database.relational.connection.port', 3306)
+    } else if (config.get('database.relational.client') == 'pg') {
+        config.set('database.relational.connection.port', 5432)
     }
 }
 
 // generate the privateSecret incase it isn't there
 if (!config.get('privateSecret'))
     config.set('privateSecret', random({ length: 64, type: 'url-safe' }))
+
+// set the default token expiry if one isn't defined
+if (!config.get('tokenExpiry')) config.set('tokenExpiry', 43200)
 
 export default config

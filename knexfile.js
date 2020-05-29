@@ -15,6 +15,6 @@ const config = yaml.safeLoad(
     }),
 )
 
-const exportable = config['database']
+const exportable = config['database'].relational
 
 module.exports = exportable

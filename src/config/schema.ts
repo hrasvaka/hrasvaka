@@ -16,14 +16,50 @@ const exportable: SchemaImpl = {
     },
     database: {
         type: 'object',
+        default: {},
+        required: ['relational', 'redis'],
         properties: {
-            client: {
-                type: 'string',
-                default: 'pg',
-            },
-            connection: {
+            relational: {
                 type: 'object',
                 default: {},
+                required: ['client', 'connection'],
+                properties: {
+                    client: {
+                        type: 'string',
+                        default: 'pg',
+                    },
+                    connection: {
+                        type: 'object',
+                        default: {},
+                        required: ['host', 'database', 'user', 'password'],
+                        properties: {
+                            host: {
+                                type: 'string',
+                                default: '127.0.0.1',
+                            },
+                            port: {
+                                type: 'number',
+                            },
+                            database: {
+                                type: 'string',
+                                default: 'hrasvaka',
+                            },
+                            user: {
+                                type: 'string',
+                                default: 'hrasvaka',
+                            },
+                            password: {
+                                type: ['string', 'null'],
+                                default: null,
+                            },
+                        },
+                    },
+                },
+            },
+            redis: {
+                type: 'object',
+                default: {},
+                required: ['host', 'port', 'database', 'password'],
                 properties: {
                     host: {
                         type: 'string',
@@ -31,14 +67,11 @@ const exportable: SchemaImpl = {
                     },
                     port: {
                         type: 'number',
+                        default: 6379,
                     },
                     database: {
-                        type: 'string',
-                        default: 'hrasvaka',
-                    },
-                    user: {
-                        type: 'string',
-                        default: 'hrasvaka',
+                        type: 'number',
+                        default: 10,
                     },
                     password: {
                         type: ['string', 'null'],
@@ -47,12 +80,11 @@ const exportable: SchemaImpl = {
                 },
             },
         },
-        default: {},
-        required: ['client'],
     },
     server: {
         type: 'object',
         default: {},
+        required: ['host', 'port'],
         properties: {
             host: {
                 type: 'string',
@@ -63,6 +95,9 @@ const exportable: SchemaImpl = {
                 default: 36352,
             },
         },
+    },
+    tokenExpiry: {
+        type: 'number',
     },
 }
 

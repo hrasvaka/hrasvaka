@@ -9,43 +9,77 @@ import jwt from 'jsonwebtoken'
 
 import { respond } from '../../server/index'
 import config from '../../config'
-import users, { UserImpl } from '../database/users'
 import { ExpressRequest, ResponseImpl } from '../../server/interfaces'
+import { isTokenBlacklisted } from '../database/redis/auth'
 
 export default async function loginRequired(
     req: ExpressRequest,
     res: express.Response,
     next,
 ): Promise<void> {
-    const token = req.headers['authorization'] as string
+    // prepare a response in case the token is invalid
     const response: ResponseImpl = {
         code: 401,
         error: false,
         data: null,
-        message: 'Unauthorized.',
+        message: 'Unauthorized',
     }
 
-    // check if the token was passed
-    if (token && token.startsWith('Bearer ')) {
-        try {
-            // check the token's validity
-            const decoded = jwt.verify(
-                token.substring(7),
-                config.get('privateSecret') as string,
-                {
-                    maxAge: '1h',
-                },
-            ) as any
+    // get the token from headers
+    const tokenHeader = req.headers['authorization'] as string
 
-            // now check if the user exists
-            const user = await users.get.by.username(decoded.username)
-            if (!user) {
+    // check if the token was passed
+    if (tokenHeader && tokenHeader.startsWith('Bearer ')) {
+        // create a new locally scoped token variable
+        const token = tokenHeader.substring(7)
+
+        // check if the token is blacklisted
+        const isBlacklisted = await isTokenBlacklisted(token)
+
+        // if the token isn't blacklisted we more further
+        if (!isBlacklisted) {
+            try {
+                // decode the token first without checking
+                // it's validity
+                const decoded = jwt.decode(token) as any
+
+                // get the current client's IP address
+                const ip =
+                    (req.headers['x-forwarded-for'] as string) ||
+                    req.connection.remoteAddress
+
+                // check if the token is coming from the same public
+                // IP address from where it was initially created
+                if (!ip == decoded.origin) {
+                    // TODO: In future, we can send the user an email
+                    // and automatically blacklist the token to prevent
+                    // attackers from re-doing this.
+                    respond(response, res)
+                }
+
+                // prepare a secret to be verified with JWT
+                const signature = `${config.get(config.get('privateSecret'))}$${
+                    decoded.identifier
+                }`
+
+                // check the token's validity
+                const verified = jwt.verify(token, signature) as any
+
+                // set the user's initial details
+                req.login = {
+                    username: verified.username,
+                    displayName: verified.displayName,
+                    email: null,
+                    password: undefined,
+                    createdOn: null,
+                    isAdmin: verified.isAdmin,
+                }
+
+                next()
+            } catch {
                 respond(response, res)
             }
-            req.login = user as UserImpl
-
-            next()
-        } catch {
+        } else {
             respond(response, res)
         }
     } else {
