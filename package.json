@@ -1,0 +1,31 @@
+{
+    "name": "hrasvaka",
+    "description": "( ह्रस्वक ) - An 🤷‍♂️ authentication-less, ☁️ minimalist link 🔗 shortener.",
+    "version": "0.0.1",
+    "license": "UNLICENSED",
+    "type": "module",
+    "homepage": "https://github.com/vasanthdeveloper/hrasvaka#readme",
+    "bugs": "https://github.com/vasanthdeveloper/hrasvaka/issues",
+    "author": {
+        "name": "Vasanth Developer",
+        "email": "vasanth@vasanthdeveloper.com",
+        "url": "https://vasanth.tech"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/vasanthdeveloper/hrasvaka.git"
+    },
+    "scripts": {
+        "start": "node src/hrasvaka.js",
+        "dev": "nodemon"
+    },
+    "keywords": [],
+    "dependencies": {},
+    "devDependencies": {
+        "eslint": "^7.9.0",
+        "eslint-config-prettier": "^6.11.0",
+        "eslint-plugin-prettier": "^3.1.4",
+        "nodemon": "^2.0.4",
+        "prettier": "^2.1.1"
+    }
+}

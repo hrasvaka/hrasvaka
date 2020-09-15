@@ -1,0 +1,9 @@
+{
+    "verbose": false,
+    "quiet": true,
+    "exec": "node src/hrasvaka.js",
+    "ext": "js,json",
+    "watch": [
+        "./src"
+    ]
+}
