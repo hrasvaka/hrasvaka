@@ -31,7 +31,7 @@ client.on('error', e => {
 })
 
 // convert redis's callback functions into modern promises
-export const get = promisify(client.get).bind(client)
+const get = promisify(client.get).bind(client)
 const set = promisify(client.set).bind(client)
 
 export const connectToDatabase = () => {
@@ -42,4 +42,4 @@ export const connectToDatabase = () => {
     return client
 }
 
-export default client
+export default get

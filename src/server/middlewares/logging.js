@@ -8,7 +8,7 @@ import moment from 'moment'
 import morgan from 'morgan'
 
 // a list of all positive HTTP codes
-const positiveHTTPCodes = ['200', '201']
+const positiveHTTPCodes = ['200', '201', '302']
 
 export default morgan((tokens, req, res) => {
     return [

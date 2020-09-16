@@ -10,6 +10,8 @@ import express from 'express'
 import config from '../config/index.js'
 import logger from '../logger.js'
 import morgan from './middlewares/logging.js'
+import root from './routes/root.js'
+import link from './routes/link.js'
 
 const app = express()
 const server = http.createServer(app)
@@ -19,6 +21,10 @@ app.use(morgan)
 
 // start the webserver and listen for incoming HTTP requests
 export default async () => {
+    // configure routing
+    app.use('/', root)
+    app.use('/*', link)
+
     // start the server
     server.listen(config.get('server.port'), config.get('server.host'))
 
