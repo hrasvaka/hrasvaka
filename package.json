@@ -22,9 +22,11 @@
     "keywords": [],
     "dependencies": {
         "conf": "^7.1.2",
+        "express": "^4.17.1",
         "itivrutaha": "^0.1.1",
         "js-yaml": "^3.14.0",
         "moment": "^2.28.0",
+        "morgan": "^1.10.0",
         "redis": "^3.0.2"
     },
     "devDependencies": {

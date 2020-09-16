@@ -7,6 +7,7 @@ import moment from 'moment'
 
 import logger from './logger.js'
 import { connectToDatabase } from './database/index.js'
+import startWebserver from './server/index.js'
 
 logger.note('Application started')
 
@@ -15,3 +16,6 @@ const startedOn = moment()
 
 // connect to the database
 await connectToDatabase()
+
+// start the web server
+await startWebserver()
