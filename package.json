@@ -17,7 +17,8 @@
     },
     "scripts": {
         "start": "node src/hrasvaka.js",
-        "dev": "nodemon"
+        "dev": "nodemon",
+        "build": "docker build ."
     },
     "keywords": [],
     "dependencies": {

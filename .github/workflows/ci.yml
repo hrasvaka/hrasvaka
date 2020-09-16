@@ -1,0 +1,28 @@
+name: Deployment
+on:
+  push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Publish to Registry
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: hrasvaka/hrasvaka
+          tags: latest
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Setting Variables
+        run: echo ::set-env name=COMMIT_MESSAGE::$(git show-branch --no-name HEAD)
+      - name: Deploying to publicserver
+        uses: appleboy/ssh-action@master
+        env:
+          COMMIT_MESSAGE: ${{ env.COMMIT_MESSAGE }}
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          envs: COMMIT_MESSAGE
+          script: bash /home/vasanth/serverfiles/publicserver/scripts/deploy-hrasvaka.bash "$COMMIT_MESSAGE"

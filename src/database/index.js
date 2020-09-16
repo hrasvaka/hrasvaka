@@ -25,6 +25,8 @@ client.on('error', e => {
             'Failed to connect to Redis database due to authentication failure',
             2,
         )
+    } else if (e.code == 'ECONNREFUSED') {
+        logger.error('Connection to database was refused.', 2)
     } else {
         throw e
     }

@@ -1,0 +1,5 @@
+Dockerfile
+nodemon.json
+prettier.config.js
+data/
+node_modules/
