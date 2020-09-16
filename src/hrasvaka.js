@@ -3,6 +3,15 @@
  *  Created On 16 September 2020
  */
 
-import config from './config/index.js'
+import moment from 'moment'
 
-console.log(config.get('database.host'))
+import logger from './logger.js'
+import { connectToDatabase } from './database/index.js'
+
+logger.note('Application started')
+
+// take note of the time when application started
+const startedOn = moment()
+
+// connect to the database
+await connectToDatabase()

@@ -22,8 +22,10 @@
     "keywords": [],
     "dependencies": {
         "conf": "^7.1.2",
+        "itivrutaha": "^0.1.1",
         "js-yaml": "^3.14.0",
-        "moment": "^2.28.0"
+        "moment": "^2.28.0",
+        "redis": "^3.0.2"
     },
     "devDependencies": {
         "eslint": "^7.9.0",
