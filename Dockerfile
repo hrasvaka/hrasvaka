@@ -5,4 +5,4 @@ COPY . /opt/hrasvaka
 RUN yarn
 VOLUME [ "/opt/hrasvaka/data" ]
 EXPOSE 15469
-ENTRYPOINT [ "node", "src/hrasvaka.js" ]
+CMD [ "node", "src/hrasvaka.js" ]
