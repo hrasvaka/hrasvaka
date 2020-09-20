@@ -2,7 +2,7 @@
     "name": "hrasvaka",
     "description": "( ह्रस्वक ) - An 🤷‍♂️ authentication-less, ☁️ minimalist link 🔗 shortener.",
     "version": "0.0.1",
-    "license": "UNLICENSED",
+    "license": "GPLv2",
     "type": "module",
     "homepage": "https://github.com/vasanthdeveloper/hrasvaka#readme",
     "bugs": "https://github.com/vasanthdeveloper/hrasvaka/issues",
